@@ -1,0 +1,31 @@
+# --- Python cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- VS Code ---
+.vscode/
+
+# --- Python environments (not used, but safe to ignore) ---
+env/
+venv/
+*.env
+
+# --- Project outputs (plots, logs, results) ---
+outputs/
+results/
+logs/
+
+# --- Model checkpoints ---
+*.pth
+*.pt
+*.pkl
+*.joblib
+
+# --- Datasets ---
+Datasets/
+
+# --- IDE / OS junk ---
+.DS_Store
+Thumbs.db
