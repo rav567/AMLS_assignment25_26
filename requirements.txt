@@ -1,0 +1,11 @@
+numpy
+scikit-learn
+torch
+torchvision
+matplotlib
+seaborn
+scipy
+pillow
+tqdm
+pandas
+scikit-image
