@@ -4,7 +4,7 @@ import numpy as np
 from Code.utils.preprocessing import flatten_images, apply_hog
 from Code.utils.augmentation import augment_image
 
-
+# Creates a configurable Random Forest to support controlled capacity experiments
 def build_random_forest(
     n_estimators=100,
     max_depth=None,
@@ -18,6 +18,7 @@ def build_random_forest(
         random_state=random_state
     )
 
+# Trains Model A using an explicit hyperparameter set to avoid hard-coded behaviour
 def train_model_a(X_train, y_train, params):
     """
     Train a Random Forest model on training data.
@@ -26,6 +27,7 @@ def train_model_a(X_train, y_train, params):
     model.fit(X_train, y_train)
     return model
 
+# Evaluates performance using multiple metrics to capture diagnostic quality beyond accuracy
 def evaluate_model_a(model, X, y):
     """
     Evaluate a tarined model on a given dataset.
@@ -39,6 +41,7 @@ def evaluate_model_a(model, X, y):
         "F1": f1_score(y, y_pred),
     }
 
+# Retrains the best model on combined data to maximise learning before final testing
 def retrain_final_model(X_train, y_train, X_val, y_val, best_params):
     """
     Retrain the selected Random Forest model using combined
@@ -52,6 +55,7 @@ def retrain_final_model(X_train, y_train, X_val, y_val, best_params):
 
     return final_model
 
+# Runs the full classical ML pipeline to ensure fair, reproducible model comparison
 def run_model_a(train_data, val_data, test_data):
     X_train, y_train = train_data
     X_val, y_val = val_data

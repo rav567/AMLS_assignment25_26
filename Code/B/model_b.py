@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from Code.utils.augmentation import augment_image
 
+# Fix random seeds to ensure fully reproducible training behaviour
 SEED = 42
 torch.manual_seed(SEED)
 np.random.seed(SEED)
@@ -17,7 +18,9 @@ if torch.cuda.is_available():
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
+# Defines a compact CNN architecture for controlled medical image classification experiments
 class BreastCNN(nn.Module):
+    # Builds a shallow multi-block CNN to balance representational power and overfitting risk
     def __init__(self, use_dropout=False):
         super(BreastCNN, self).__init__()
         
@@ -55,7 +58,7 @@ class BreastCNN(nn.Module):
             nn.ReLU(),
             nn.Linear(64, 2)
         )
-    
+    # Defines the forward pass to ensure consistent feature extraction and classification flow
     def forward(self, x):
         x = self.block1(x)
         x = self.block2(x)
@@ -66,6 +69,7 @@ class BreastCNN(nn.Module):
         x = self.fc(x)
         return x
 
+# Trains the model for one epoch while optionally injecting augmentation to improve robustness
 def train_epoch(model, loader, criterion, optimizer, device, use_augmentation=False):
     model.train()
     total_loss = 0
@@ -92,6 +96,7 @@ def train_epoch(model, loader, criterion, optimizer, device, use_augmentation=Fa
     
     return total_loss / len(loader)
 
+# Evaluates the model using clinically relevant metrics without gradient updates
 
 def evaluate(model, loader, criterion, device):
     """Evaluate model and return metrics."""
@@ -121,6 +126,7 @@ def evaluate(model, loader, criterion, device):
     
     return metrics
 
+# Runs the full CNN experimental pipeline to assess regularisation and augmentation effects
 
 def run_model_b(train_data, val_data, test_data):
     """
