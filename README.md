@@ -58,8 +58,8 @@ AMLS_25_26_SN25261710/
 * **Image size**: 28 × 28 (grayscale)
 
 ⚠️ **Important**
-The `Datasets/` folder must be **empty when submitting** this project.
-During assessment, the dataset will be copied into this folder by the marker.
+The `Datasets/` folder will be **empty when submitting** this project.
+During assessment, the dataset will be copied into this folder.
 
 Expected structure during execution:
 
